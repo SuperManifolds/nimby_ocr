@@ -295,6 +295,8 @@ def main():
         frame_number += 1
     #
 
+    all_stops.sort(key=lambda x: x.arrive_time)
+
     cap.release()
 
     write_csv(all_stops, args.output_file)
