@@ -8,6 +8,7 @@ Uses optical character recognition to read stop timings from NIMBY Rails lines a
 * opencv
 
 ## How to use
+Set UI scaling to 200%
 Make a screen recording of the stops list in a NIMBY rails line as you scroll from the top to the bottom at a casual pace.
 Now run the Python script passing in the path to the screen recording
 

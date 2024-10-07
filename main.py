@@ -53,7 +53,7 @@ class Stop:
         self.region = region
 
     def is_valid(self) -> bool:
-        if self.name.startswith("Waypoint"):
+        if self.name and self.name.startswith("Waypoint"):
             return (
                 self.duration is not None
                 and self.distance is not None
@@ -105,7 +105,7 @@ def stops_from_text(text: str) -> [Stop]:
                 current_stop.set_name_info(*extract_name_line(line))
             elif extract_region_line(line):
                 current_stop.set_region_info(*extract_region_line(line))
-                if current_stop.name.startswith("Waypoint"):
+                if current_stop.name and current_stop.name.startswith("Waypoint"):
                     current_stop.region = None
 
                 if current_stop.is_valid() and not has_stop(
@@ -177,6 +177,12 @@ def timestamp_to_timedelta(timestamp: str) -> timedelta:
     if len(timestamp) > 5:
         hours = timestamp[:-6].replace("o", "0")
 
+    if not secs.isdigit() or not mins.isdigit() or not hours.isdigit():
+        return None
+
+    if int(mins) > 59 or int(secs) > 59:
+        return None
+
     return timedelta(hours=int(hours), minutes=int(mins), seconds=int(secs))
 
 
@@ -187,6 +193,12 @@ def timestamp_to_datetime(timestamp: str) -> time:
     if len(timestamp) > 5:
         hours = timestamp[:-6].replace("o", "0")
 
+    if not secs.isdigit() or not mins.isdigit() or not hours.isdigit():
+        return None
+
+    if int(mins) > 59 or int(secs) > 59:
+        return None
+
     return time(hour=int(hours), minute=int(mins), second=int(secs))
 
 
@@ -196,7 +208,7 @@ def distance_to_int(distance: str) -> int:
 
 def has_stop(name: str, time: time, stops: [Stop]) -> bool:
     for stop in stops:
-        if stop.arrive_time == time:
+        if stop.arrive_time == time or stop.depart_time == time:
             return True
     return False
 
