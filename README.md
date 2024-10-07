@@ -3,7 +3,11 @@
 Uses optical character recognition to read stop timings from NIMBY Rails lines and generates a csv
 
 ## Example
-![example video](https://github.com/SuperManifolds/nimby_ocr/raw/refs/heads/main/example.mp4)
+
+
+https://github.com/user-attachments/assets/061abde5-d986-4ed8-a9b9-b4171fec8fd9
+
+
 ```
 name,platform,region,arrival,departure,duration,distance,speed
 North Brunswick,3N,North Brunswick Township,00:00:00,00:00:30,0:04:28,6774,91
